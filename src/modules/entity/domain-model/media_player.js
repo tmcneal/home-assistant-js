@@ -94,6 +94,11 @@ export default class MediaPlayer {
     return (this.stateObj.attributes.supported_media_commands & 1024) !== 0;
   }
 
+  get supportsDirectionButtons() {
+    console.log(this.stateObj.attributes.supported_media_commands);
+    return (this.stateObj.attributes.supported_media_commands & 32768) !== 0;
+  }
+
   get supportsPlay() {
     return (this.stateObj.attributes.supported_media_commands & 16384) !== 0;
   }
@@ -175,6 +180,22 @@ export default class MediaPlayer {
 
   volumeUp() {
     this.callService('volume_down');
+  }
+
+  navigateUp() {
+    this.callService('navigate', { direction: 'up' })
+  }
+
+  navigateDown() {
+    this.callService('navigate', { direction: 'down' })
+  }
+
+  navigateLeft() {
+    this.callService('navigate', { direction: 'left' })
+  }
+
+  navigateRight() {
+    this.callService('navigate', { direction: 'right' })
   }
 
   // helper method
